@@ -1,5 +1,6 @@
-@extends('layouts.base')
-
+@extends('layouts.master')
+@section('header')
+@endsection
 @section('content')
 
 <div class="content-wrapper">
@@ -913,4 +914,9 @@
   </section>
   <!-- /.content -->
 </div>
+
+@endsection
+
+@section('footer')
+
 @endsection
