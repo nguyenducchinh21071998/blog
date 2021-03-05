@@ -22,7 +22,8 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(10),
             'mobile' => '0987654321',
             'address' => 'HN',
-            'position' => 'Admin'
+            'position' => 1,
+            'gender' => 1
         ]);
     }
 }

@@ -53,7 +53,7 @@ License: You must have a valid license purchased only from themeforest(the above
         </div>
         <!-- END CONTAINER -->
         <!-- BEGIN FOOTER -->
-        @include('layouts.main_footer')
+        {{--  @include('layouts.main_footer')  --}}
         <!-- END FOOTER -->
         <!--[if lt IE 9]>
 <script src="assets/global/plugins/respond.min.js"></script>

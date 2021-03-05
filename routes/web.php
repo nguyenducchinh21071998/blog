@@ -16,10 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('auth.login');
 });
-Route::get('/user', function () {
-    return view('user.list');
-});
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/user', 'UserController@index');
+Route::post('/user/list', 'UserController@getListUser');
+Route::post('/user/delete', 'UserController@delete');
+Route::post('/user/store', 'UserController@store');
+Route::get('/user/edit/{id}', 'UserController@edit');
+Route::post('/user/update', 'UserController@update');

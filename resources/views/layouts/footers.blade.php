@@ -21,9 +21,6 @@
 <script src="dist/js/pages/dashboard2.js"></script>
 
 <script src='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.min.js'></script>
-<script src="assets/global/scripts/datatable.min.js" type="text/javascript"></script>
-<script src="assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-<script src="assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-<script src="assets/global/plugins/bootstrap-datepicker.min.js"></script>
-<script src="assets/global/plugins/jquery.validate.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.3/js/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.23/datatables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
