@@ -10,7 +10,7 @@
                     <div class="caption font-dark">
                         <i class="icon-settings font-dark"></i>
                         <h2>
-                            <span class="caption-subject bold uppercase"> Danh sách User</span>
+                            <span class="caption-subject bold uppercase"> Danh sách người dùng</span>
                         </h2>
                     </div>
                 </div>
@@ -19,7 +19,7 @@
                         <div class="col-md-6">
                             <div class="btn-group">
                                 <button id="create_btn" class="btn btn-sm btn-success sbold green" style="padding-right: 20px;"> 
-                                    <i class="fa fa-plus"></i> Tạo mới khóa học   
+                                    <i class="fa fa-plus"></i> Tạo mới người dùng   
                                 </button>
                             </div>
                         </div>
@@ -46,87 +46,54 @@
 
     <div class="modal fade" id="detail">
         <div class="modal-dialog modal-lg">
-            <div class="overlay"></div>
-            <div class="modal-content responsemodal127">
-            <div class="modal-header" align="center">
-                <h4 class="modal-title uppercase" > Thông tin chi tiết</h4>
-            </div>
-            <div class="modal-body">
-                <div class="col-md-12">
-                <div class="col-md-12">
-                    <table class="table table-bordered">
-                    <tbody>
-
-                        <tr>
-                        <th style="width: 30%">Tên khóa học</th>
-                        <td id="name"></td>
-                        </tr>
-
-                        <tr>
-                        <th style="width: 30%">Tên viết tắt</th>
-                        <td id="short_name"></td>
-                        </tr>
-
-                        <tr>
-                        <th style="width: 30%">Mã khóa học</th>
-                        <td id="code_url"></td>
-                        </tr>
-
-                        <tr style="width: 30%">
-                        <th>Học phí</th>
-                        <td id="tuition"></td>
-                        </tr>
-                        <tr style="width: 30%">
-                        <th>Bảo lưu</th>
-                        <td id="type"></td>
-                        </tr>
-                        <tr style="width: 30%">
-                        <th>Số tiền bảo lưu (VNĐ)</th>
-                        <td id="reserve_amount"></td>
-                        </tr>
-                        {{-- 
-                        <tr>
-                        <th>Thông tin khóa học</th>
-                        <td id="class_info"></td>
-                        </tr>
-
-                        <tr>
-                        <th>Nội dung</th>
-                        <td id="content">
-                            <div class="content">
-
-                            </div>
-
-                            <a id="view-more" style="margin-right: 20px; float: right; display: none;"> ... Xem thêm</a>
-
-                            <a id="hide" style="margin-right: 20px; float: right; display: none;"> ... Ẩn</a>
-                        </td>
-                        </tr> --}}
-
-                        <tr style="width: 30%">
-                        <th>Chính sách giảm học phí</th>
-                        <td id="policy">
-                            <div class="content2">
-
-                            </div>
-                        </td>
-                        </tr>
-
-                    </tbody>
-                    </table>
+            <div class="modal-content">
+                <div class="modal-header" align="center">
+                    <h4 class="modal-title uppercase" > Thông tin chi tiết</h4>
                 </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th style="width: 30%">Họ và tên </th>
+                                    <td id="userNameDetail"></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 30%">Email</th>
+                                    <td id="emailDetail"></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 30%">Số điện thoại</th>
+                                    <td id="mobileDetail"></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 30%">Địa chỉ</th>
+                                    <td id="addressDetail"></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 30%">Giới tính </th>
+                                    <td id="genderDetail"></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 30%">Vai trò </th>
+                                    <td id="positionDetail"></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 30%">Trạng thái</th>
+                                    <td id="statusDetail"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <center>
-                <button type="button" class="btn btn-sm btn-danger close-form" data-dismiss="modal">Đóng</button>
-                </center>
-            </div>
+                <div class="modal-footer" style="justify-content: center;">
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Đóng</button>
+                </div>
             </div>
         </div>
     </div>
     <div class="modal fade" id="create">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Tạo mới tài khoản</h4>
@@ -181,7 +148,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer" style="justify-content: center;">
                     <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Đóng</button>
                     <button type="submit" class="btn btn-sm btn-success green" id="btn-add"> Thêm mới</button>
                 </div>
@@ -189,7 +156,7 @@
         </div>
     </div>
     <div class="modal fade" id="edit">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">CHỈNH SỬA tài khoản</h4>
@@ -254,7 +221,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer" style="justify-content: center;">
                     <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Đóng</button>
                     <button type="submit" class="btn btn-sm btn-warning green" id="btn-update"> Cập nhật</button>
                 </div>
@@ -408,6 +375,31 @@
               toastr.error(res.message);
             }
           }
+        });
+    });
+    $(document).on('click', '.btn-detail', function () {
+        var id = $(this).attr('data-id');
+        $('#detail').modal('show');
+
+        $.ajax({
+            type: 'get',
+            url: '/user/edit/' + id,
+            data:   {
+                id: id,
+            },
+            success: function (res) {
+                $('#id').val(res.data.id);
+                $('#userNameDetail').val(res.data.name);
+                $('#emailDetail').val(res.data.email);
+                $('#mobileDetail').val(res.data.mobile);
+                $('#addressDetail').val(res.data.address);
+                $('#genderDetail').val(res.data.gender);
+                $('#positionDetail').val(res.data.position);
+                $('#statusDetail').val(res.data.status);
+
+            },error: function (xhr, ajaxOptions, thrownError) {
+                toastr["error"](thrownError); 
+            }
         });
     });
 </script>

@@ -26,7 +26,15 @@
             <a href="/user" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Manager User
+                Quản lý người dùng
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/course" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Quản lý khóa học
               </p>
             </a>
           </li>

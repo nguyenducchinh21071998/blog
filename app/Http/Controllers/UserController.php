@@ -21,6 +21,7 @@ class UserController extends Controller
             ->addIndexColumn()
             ->addColumn('action', function ($users){
                 $txt = "";
+                $txt .= '<a data-id="' . $users->id . '" class="icon-warning btn btn-xs btn-primary btn-detail" data-tooltip="tooltip" data-placement="top" title="Chi tiết"/><i class="fas fa-eye"></i></a>';
                 $txt .= '<a data-id="' . $users->id . '" class="icon-warning btn btn-xs btn-warning btn-edit" data-tooltip="tooltip" data-placement="top" title="Chỉnh sửa"/><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>';
                 $txt .= '<a data-id="' . $users->id . '" class="icon-danger btn btn-xs btn-danger btn-delete" data-tooltip="tooltip" data-placement="top" title="Xóa"/><i class="fas fa-trash-alt" aria-hidden="true"></i></a>';
 
