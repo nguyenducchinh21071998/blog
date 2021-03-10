@@ -38,6 +38,14 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="/class-room" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Quản lý lớp học
+              </p>
+            </a>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

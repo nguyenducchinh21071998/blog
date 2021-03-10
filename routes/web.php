@@ -35,3 +35,12 @@ Route::post('/course/delete', 'CourseController@delete');
 Route::post('/course/store', 'CourseController@store');
 Route::get('/course/edit/{id}', 'CourseController@edit');
 Route::post('/course/update', 'CourseController@update');
+
+Route::get('/class-room', 'ClassRoomController@index');
+Route::get('/class-room/list', 'ClassRoomController@getListClass');
+Route::post('/class-room/delete', 'ClassRoomController@delete');
+Route::post('/class-room/store', 'ClassRoomController@store');
+Route::get('/class-room/edit/{id}', 'ClassRoomController@edit');
+Route::post('/class-room/update', 'ClassRoomController@update');
+
+Route::get('/get-course-by-semester/{id}', 'ClassRoomController@getCourseBy');

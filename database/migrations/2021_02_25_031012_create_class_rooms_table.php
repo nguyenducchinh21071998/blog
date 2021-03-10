@@ -18,14 +18,15 @@ class CreateClassRoomsTable extends Migration
             $table->integer('course_id');
             $table->integer('teacher_id');
             $table->string('name');
-            $table->string('class')->comment("lop");
+            $table->string('class')->comment("lop")->nullable();
             $table->string('type_class')->comment("1: thực hành, 2: lí thuyết");
             $table->string('status_class')->comment("1: chưa diễn ra, 2: đang diễn ra, 3: đã kết thúc");
             $table->string('department_id')->comment("phòng học");
-            $table->date('schedule')->comment("lich hoc");
+            $table->string('semester_id')->comment("học ki");
+            $table->string('schedule')->comment("lich hoc");
             $table->date('start_date')->comment("ngày bắt đầu");
             $table->date('end_date')->comment("ngày kết thúc");
-            $table->date('total_student')->comment("tổng số học viên cho lớp học");
+            $table->string('total_student')->comment("tổng số học viên cho lớp học");
             $table->timestamps();
         });
     }
