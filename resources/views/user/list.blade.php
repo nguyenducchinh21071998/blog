@@ -388,14 +388,26 @@
                 id: id,
             },
             success: function (res) {
-                $('#id').val(res.data.id);
-                $('#userNameDetail').val(res.data.name);
-                $('#emailDetail').val(res.data.email);
-                $('#mobileDetail').val(res.data.mobile);
-                $('#addressDetail').val(res.data.address);
-                $('#genderDetail').val(res.data.gender);
-                $('#positionDetail').val(res.data.position);
-                $('#statusDetail').val(res.data.status);
+                $('#id').html(res.data.id);
+                $('#userNameDetail').html(res.data.name);
+                $('#emailDetail').html(res.data.email);
+                $('#mobileDetail').html(res.data.mobile);
+                $('#addressDetail').html(res.data.address);
+                if (res.data.gender == 1) {
+                    $('#genderDetail').html("Nam");
+                } else {
+                    $('#genderDetail').html("Nữ");
+                }
+                if (res.data.position == 1) {
+                    $('#positionDetail').html("Admin");
+                } else {
+                    $('#positionDetail').html("Giáo viên");
+                }
+                if (res.data.status == 1) {
+                    $('#statusDetail').html("Active");
+                } else {
+                    $('#statusDetail').html("Deactivate");
+                }
 
             },error: function (xhr, ajaxOptions, thrownError) {
                 toastr["error"](thrownError); 
