@@ -161,7 +161,15 @@ class TeacherClassReplaceController extends Controller
         DB::beginTransaction();
 
         try {
-            $data = User::find($id);
+            $data = TeacherClassReplace::find($id);
+            $data['userNameTeacher'] = User::find($data->teacher_id)->name;
+            $data['userNameTeacherRepace'] = User::find($data->teacher_replace_id)->name;
+            $data['className'] = ClassRoom::find($data->class_room_id)->name;
+            if ($data->user_confirm_id) {
+                $data['userNameTeacherConfirm'] = User::find($data->user_confirm_id)->name;
+            } else {
+                $data['userNameTeacherConfirm'] = '';
+            }
             DB::commit();
 
             return response()->json([
@@ -178,19 +186,16 @@ class TeacherClassReplaceController extends Controller
         }
     }
     public function update(Request $request) {
-
         DB::beginTransaction();
         try {
             $data = $request->all();
-            $user = User::where('id', $data['id'])->first();
+            $user = TeacherClassReplace::where('id', $data['id'])->first();
             $user->update([
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'mobile' => $data['mobile'],
-                'address' => $data['address'],
-                'gender' => $data['gender'],
-                'position' => $data['position'],
-                'status' => $data['status']
+                'class_room_id' => $data['class_room_id'],
+                'teacher_id' => Auth::user()->id,
+                'teacher_replace_id' => $data['teacher_replace_id'],
+                'replacement_day' => $data['replacement_day'],
+                'reason' => $data['reason']
             ]);
             DB::commit();
 

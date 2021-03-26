@@ -19,8 +19,8 @@
                         <div class="col-md-6">
                             <div class="btn-group">
                                 @if (Auth::user()->position == 2)
-                                    <button id="create_btn" class="btn btn-sm btn-success sbold green" style="padding-right: 20px;"> 
-                                        <i class="fa fa-plus"></i> Tạo lịch dạy thay 
+                                    <button id="create_btn" class="btn btn-sm btn-success sbold green" style="padding-right: 20px;">
+                                        <i class="fa fa-plus"></i> Tạo lịch dạy thay
                                     </button>
                                 @endif
                             </div>
@@ -58,28 +58,28 @@
                         <table class="table table-bordered">
                             <tbody>
                                 <tr>
-                                    <th style="width: 30%">Họ và tên </th>
-                                    <td id="userNameDetail"></td>
+                                    <th style="width: 30%">Lớp</th>
+                                    <td id="class_room_idDetail"></td>
                                 </tr>
                                 <tr>
-                                    <th style="width: 30%">Email</th>
-                                    <td id="emailDetail"></td>
+                                    <th style="width: 30%">Lý do </th>
+                                    <td id="reasonDetail"></td>
                                 </tr>
                                 <tr>
-                                    <th style="width: 30%">Số điện thoại</th>
-                                    <td id="mobileDetail"></td>
+                                    <th style="width: 30%">Người tạo</th>
+                                    <td id="teacherIdDetail"></td>
                                 </tr>
                                 <tr>
-                                    <th style="width: 30%">Địa chỉ</th>
-                                    <td id="addressDetail"></td>
+                                    <th style="width: 30%">Người dạy thay</th>
+                                    <td id="teacher_replace_idDetail"></td>
                                 </tr>
                                 <tr>
-                                    <th style="width: 30%">Giới tính </th>
-                                    <td id="genderDetail"></td>
+                                    <th style="width: 30%">Người duyệt </th>
+                                    <td id="userIdDetail"></td>
                                 </tr>
                                 <tr>
-                                    <th style="width: 30%">Vai trò </th>
-                                    <td id="positionDetail"></td>
+                                    <th style="width: 30%">Ngày dạy thay </th>
+                                    <td id="replacement_dayDetail"></td>
                                 </tr>
                                 <tr>
                                     <th style="width: 30%">Trạng thái</th>
@@ -153,64 +153,46 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">CHỈNH SỬA tài khoản</h4>
+                    <h4 class="modal-title">CHỈNH SỬA lịch dạy thay</h4>
                 </div>
                 <div class="modal-body">
                     <form  action="" id="frmEditUser" name="frmEditUser" method="POST" enctype="multipart/form-data" autocomplete="off">
                         <input type="hidden" class="form-control" id="id" name="id">
                         {{ csrf_field() }}
                         <div class="col-md-12">
-                            <div class="form-group form-md-line-input form-md-floating-label">
-                                <label for="userNameEdit">Họ và tên<span class="requireds" style="color: red"> (*)</span></label>
-                                <input type="text" class="form-control" id="userNameEdit" name="userNameEdit">
+                            <div class="form-group form-md-line-input form-md-floating-label {{ $errors->has('reasonEdit') ? 'has-error' : '' }}">
+                                <label for="reasonEdit">Lý do<span class="requireds" style="color: red"> (*)</span></label>
+                                <input type="text" class="form-control" id="reasonEdit" name="reasonEdit">
                             </div>
                         </div>
 
                         <div class="col-md-12">
-                            <div class="form-group form-md-line-input form-md-floating-label">
-                                <label for="emailEdit">Email<span class="requireds" style="color: red"> (*)</span></label>
-                                <input type="text" class="form-control" id="emailEdit" name="emailEdit">
-                            </div>
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="form-group form-md-line-input form-md-floating-label">
-                                <label for="mobileEdit">Số điện thoại<span class="requireds" style="color: red"> (*)</span></label>
-                                <input type="text" class="form-control" id="mobileEdit" name="mobileEdit">
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group form-md-line-input form-md-floating-label">
-                                <label for="addressEdit">Địa chỉ<span class="requireds" style="color: red"> (*)</span></label>
-                                <input type="text" class="form-control" id="addressEdit" name="addressEdit">
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group form-md-line-input form-md-floating-label">
-                                <label for="genderEdit">Giới tính<span class="requireds" style="color: red"> (*)</span></label>
-                                <select class="form-control" name="genderEdit" id="genderEdit">
-                                    <option value="1">Nam</option>
-                                    <option value="2">Nữ</option>
+                            <div class="form-group form-md-line-input form-md-floating-label {{ $errors->has('class_room_idEdit') ? 'has-error' : '' }}">
+                                <label for="class_room_idEdit">Lớp<span class="requireds" style="color: red"> (*)</span></label>
+                                <select  id = "class_room_idEdit" class="form-control" name="class_room_idEdit">
+                                    <option value="">Chọn</option>
+                                    @foreach($classRooms as $db)
+                                    <option value="{{$db->id}}">{{$db->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
 
                         <div class="col-md-12">
-                            <div class="form-group form-md-line-input form-md-floating-label ">
-                                <label for="positionEdit">Vai trò<span class="requireds" style="color: red"> (*)</span></label>
-                                <select class="form-control" name="positionEdit" id="positionEdit">
-                                    <option value="2">Giáo viên </option>
-                                    <option value="1">Admin</option>
+                            <div class="form-group form-md-line-input form-md-floating-label {{ $errors->has('teacher_replace_idEdit') ? 'has-error' : '' }}">
+                                <label for="teacher_replace_idEdit">Số điện thoại<span class="requireds" style="color: red"> (*)</span></label>
+                                <select  id = "teacher_replace_idEdit" class="form-control" name="teacher_replace_idEdit">
+                                    <option value="">Chọn</option>
+                                    @foreach($teachers as $db)
+                                    <option value="{{$db->id}}">{{$db->name}}</option>
+                                    @endforeach
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <div class="form-group form-md-line-input form-md-floating-label ">
-                                <label for="statusEdit">Trạng thái<span class="requireds" style="color: red"> (*)</span></label>
-                                <select class="form-control" name="statusEdit" id="statusEdit">
-                                    <option value="1">Active</option>
-                                    <option value="2">Deactivate</option>
-                                </select>
+                            <div class="form-group form-md-line-input form-md-floating-label {{ $errors->has('replacement_dayEdit') ? 'has-error' : '' }}">
+                                <label for="replacement_dayEdit">Thời gian<span class="requireds" style="color: red"> (*)</span></label>
+                                <input type="text" class="form-control" id="replacement_dayEdit" name="replacement_dayEdit">
                             </div>
                         </div>
                     </form>
@@ -239,8 +221,15 @@
         zIndexOffset: 10000,
         startDate: '0d'
     });
+    $('#frmCreateUser #replacement_dayEdit').datepicker({
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        container: '#frmEditUser',
+        zIndexOffset: 10000,
+        startDate: '0d'
+    });
 
-    var table = $('#user_list').DataTable({ 
+    var table = $('#user_list').DataTable({
         processing: true,
         serverSide: true,
         ordering: false,
@@ -260,7 +249,7 @@
             {data: 'teacher_id'},
             {data: 'teacher_replace_id', className: 'tx-center'},
             {data: 'user_confirm_id', className: 'tx-center'},
-            {data: 'status', className: 'tx-center'},   
+            {data: 'status', className: 'tx-center'},
         ]
     });
     $(document).on('click', '.btn-delete', function(){
@@ -274,7 +263,7 @@
           cancelButtonText: "Không",
           confirmButtonText: "Có",
         },
-        function() { 
+        function() {
           $.ajax({
             url: '/teach-class-replace/delete',
             type: "POST",
@@ -307,7 +296,7 @@
           cancelButtonText: "Không",
           confirmButtonText: "Có",
         },
-        function() { 
+        function() {
           $.ajax({
             url: '/teach-class-replace/update-replace',
             type: "POST",
@@ -364,39 +353,34 @@
 
         $.ajax({
             type: 'get',
-            url: '/user/edit/' + id,
+            url: '/teach-class-replace/edit/' + id,
             data:   {
                 id: id,
             },
             success: function (res) {
+                console.log(res.data);
                 $('#id').val(res.data.id);
-                $('#userNameEdit').val(res.data.name);
-                $('#emailEdit').val(res.data.email);
-                $('#mobileEdit').val(res.data.mobile);
-                $('#addressEdit').val(res.data.address);
-                $('#genderEdit').val(res.data.gender);
-                $('#positionEdit').val(res.data.position);
-                $('#statusEdit').val(res.data.status);
+                $('#class_room_idEdit').val(res.data.class_room_id);
+                $('#teacher_replace_idEdit').val(res.data.teacher_replace_id);
+                $('#replacement_dayEdit').val(res.data.replacement_day);
+                $('#reasonEdit').val(res.data.reason);
 
             },error: function (xhr, ajaxOptions, thrownError) {
-                toastr["error"](thrownError); 
+                toastr["error"](thrownError);
             }
         });
     });
     $('#btn-update').on('click', function (event) {
         event.preventDefault();
         $.ajax({
-          url: '/user/update',
+          url: '/teach-class-replace/update',
           type: 'POST',
           data: {
             id: $('#id').val(),
-            name: $('#userNameEdit').val(),
-            email: $('#emailEdit').val(),
-            mobile: $('#mobileEdit').val(),
-            address: $('#addressEdit').val(),
-            gender: $('#genderEdit').val(),
-            position: $('#positionEdit').val(),
-            status: $('#statusEdit').val(),
+            class_room_id: $('#class_room_idEdit').val(),
+            teacher_replace_id: $('#teacher_replace_idEdit').val(),
+            replacement_day: $('#replacement_dayEdit').val(),
+            reason: $('#reasonEdit').val(),
           },
           success: function (res)
           {
@@ -416,34 +400,26 @@
 
         $.ajax({
             type: 'get',
-            url: '/user/edit/' + id,
+            url: '/teach-class-replace/edit/' + id,
             data:   {
                 id: id,
             },
             success: function (res) {
                 $('#id').html(res.data.id);
-                $('#userNameDetail').html(res.data.name);
-                $('#emailDetail').html(res.data.email);
-                $('#mobileDetail').html(res.data.mobile);
-                $('#addressDetail').html(res.data.address);
-                if (res.data.gender == 1) {
-                    $('#genderDetail').html("Nam");
-                } else {
-                    $('#genderDetail').html("Nữ");
-                }
-                if (res.data.position == 1) {
-                    $('#positionDetail').html("Admin");
-                } else {
-                    $('#positionDetail').html("Giáo viên");
-                }
+                $('#class_room_idDetail').html(res.data.className);
+                $('#reasonDetail').html(res.data.reason);
+                $('#teacherIdDetail').html(res.data.userNameTeacher);
+                $('#teacher_replace_idDetail').html(res.data.userNameTeacherRepace);
+                $('#userIdDetail').html(res.data.userNameTeacherConfirm);
+                $('#replacement_dayDetail').html(res.data.replacement_day);
                 if (res.data.status == 1) {
-                    $('#statusDetail').html("Active");
+                    $('#statusDetail').html("Đang chờ xác nhận");
                 } else {
-                    $('#statusDetail').html("Deactivate");
+                    $('#statusDetail').html("Đã duyệt");
                 }
 
             },error: function (xhr, ajaxOptions, thrownError) {
-                toastr["error"](thrownError); 
+                toastr["error"](thrownError);
             }
         });
     });
