@@ -18,8 +18,8 @@ class CreateTeacherClassReplacesTable extends Migration
             $table->integer('class_room_id');
             $table->integer('teacher_id')->comment('giao vien yeu cau day thay');
             $table->integer('teacher_replace_id')->comment('giao vien duoc yeu cau day thay');
-            $table->integer('user_confirm_id')->comment('admin xac nhan day thay');
-            $table->integer('status')->comment('trạng thái: 1: yêu cầu dạy thay, 2: giao viên dạy thay xác nhận, 3: admin xác nhận');
+            $table->integer('user_confirm_id')->comment('admin xac nhan day thay')->nullable();
+            $table->integer('status')->comment('trạng thái: 1: yêu cầu dạy thay, 2: giao viên dạy thay xác nhận, 3: admin xác nhận')->default(1);
             $table->date('replacement_day')->comment('ngay day thay');
             $table->string('reason');
             $table->timestamps();

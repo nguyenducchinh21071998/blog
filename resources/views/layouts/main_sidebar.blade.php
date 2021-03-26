@@ -22,27 +22,45 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <li class="nav-item">
-            <a href="/user" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Quản lý người dùng
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="/course" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Quản lý khóa học
-              </p>
-            </a>
-          </li>
+          @if (Auth::user()->position == 1)
+            <li class="nav-item">
+              <a href="/user" class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Quản lý người dùng
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/course" class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Quản lý khóa học
+                </p>
+              </a>
+            </li>
+          @endif
           <li class="nav-item">
             <a href="/class-room" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Quản lý lớp học
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/calendar" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Quản lý lịch dạy
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/teach-class-replace" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Quản lý lịch dạy thay
               </p>
             </a>
           </li>

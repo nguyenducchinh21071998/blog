@@ -8,7 +8,7 @@ use App\User;
 use Illuminate\Support\Facades\DB;
 use Log;
 use \Illuminate\Support\Facades\Hash;
-
+use Mail;
 class UserController extends Controller
 {
     public function index() {
@@ -83,10 +83,8 @@ class UserController extends Controller
                 'gender' => $data['gender'],
                 'position' => $data['position'],
                 'password' => Hash::make('123456789')
-            ]);  
-            // User::created($data);          
+            ]);
             DB::commit();
-
             return response()->json([
                 'error' => false,
                 'message' => 'Thêm mới thành công !'

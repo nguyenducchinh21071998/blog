@@ -13,6 +13,7 @@ use Log;
 use \Illuminate\Support\Facades\Hash;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClassRoomController extends Controller
 {
@@ -28,14 +29,22 @@ class ClassRoomController extends Controller
     }
 
     public function getListClass() {
-        $classRooms = ClassRoom::orderBy('id', 'desc');
+        $user = Auth::user();
+        if ($user->position == 1) {
+            $classRooms = ClassRoom::orderBy('id', 'desc');
+        } else {
+            $classRooms = ClassRoom::where('teacher_id', $user->id)->orderBy('id', 'desc');
+        }
+        
         return DataTables::of($classRooms)
             ->addIndexColumn()
             ->addColumn('action', function ($classRooms){
                 $txt = "";
                 $txt .= '<a data-id="' . $classRooms->id . '" class="icon-warning btn btn-xs btn-primary btn-detail" data-tooltip="tooltip" data-placement="top" title="Chi tiết"/><i class="fas fa-eye"></i></a>';
-                $txt .= '<a data-id="' . $classRooms->id . '" class="icon-warning btn btn-xs btn-warning btn-edit" data-tooltip="tooltip" data-placement="top" title="Chỉnh sửa"/><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>';
-                $txt .= '<a data-id="' . $classRooms->id . '" class="icon-danger btn btn-xs btn-danger btn-delete" data-tooltip="tooltip" data-placement="top" title="Xóa"/><i class="fas fa-trash-alt" aria-hidden="true"></i></a>';
+                if (Auth::user()->position == 1) {
+                    $txt .= '<a data-id="' . $classRooms->id . '" class="icon-warning btn btn-xs btn-warning btn-edit" data-tooltip="tooltip" data-placement="top" title="Chỉnh sửa"/><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>';
+                    $txt .= '<a data-id="' . $classRooms->id . '" class="icon-danger btn btn-xs btn-danger btn-delete" data-tooltip="tooltip" data-placement="top" title="Xóa"/><i class="fas fa-trash-alt" aria-hidden="true"></i></a>';
+                }
 
                 return $txt;
             })

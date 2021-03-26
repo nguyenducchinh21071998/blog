@@ -18,9 +18,11 @@
                     <div class="row" style="margin-top: 20px; margin-bottom: 27px;">
                         <div class="col-md-6">
                             <div class="btn-group">
-                                <button id="create_btn" class="btn btn-sm btn-success sbold green" style="padding-right: 20px;"> 
-                                    <i class="fa fa-plus"></i> Tạo mới lớp học   
-                                </button>
+                                @if (Auth::user()->position == 1)
+                                    <button id="create_btn" class="btn btn-sm btn-success sbold green" style="padding-right: 20px;"> 
+                                        <i class="fa fa-plus"></i> Tạo mới lớp học   
+                                    </button>
+                                @endif
                             </div>
                         </div>
                     </div>
