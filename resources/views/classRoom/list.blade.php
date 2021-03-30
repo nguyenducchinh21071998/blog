@@ -19,8 +19,8 @@
                         <div class="col-md-6">
                             <div class="btn-group">
                                 @if (Auth::user()->position == 1)
-                                    <button id="create_btn" class="btn btn-sm btn-success sbold green" style="padding-right: 20px;"> 
-                                        <i class="fa fa-plus"></i> Tạo mới lớp học   
+                                    <button id="create_btn" class="btn btn-sm btn-success sbold green" style="padding-right: 20px;">
+                                        <i class="fa fa-plus"></i> Tạo mới lớp học
                                     </button>
                                 @endif
                             </div>
@@ -161,42 +161,174 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">CHỈNH SỬA khóa học</h4>
+                    <h4 class="modal-title">CHỈNH SỬA lớp học</h4>
                 </div>
                 <div class="modal-body">
                     <form  action="" id="frmEditUser" name="frmEditUser" method="POST" enctype="multipart/form-data" autocomplete="off">
                         <input type="hidden" class="form-control" id="id" name="id">
                         {{ csrf_field() }}
-                        <div class="col-md-12">
-                            <div class="form-group form-md-line-input form-md-floating-label {{ $errors->has('nameCourseEdit') ? 'has-error' : '' }}">
-                                <label for="nameCourseEdit">Tên khóa học<span class="requireds" style="color: red"> (*)</span></label>
-                                <input type="text" class="form-control" id="nameCourseEdit" name="nameCourseEdit">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input form-md-floating-label {{ $errors->has('semester_idEdit') ? 'has-error' : '' }}">
+                                    <label for="semester_idEdit">Học kì<span class="requireds" style="color: red"> (*)</span></label>
+                                    <select  id = "semester_idEdit" class="form-control" name="semester_idEdit">
+                                        <option value="">Chọn</option>
+                                        @foreach($semesters as $db)
+                                        <option value="{{$db->id}}">{{$db->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="form-group form-md-line-input form-md-floating-label {{ $errors->has('semesterIdEdit') ? 'has-error' : '' }}">
-                                <label for="semesterIdEdit">Học kì<span class="requireds" style="color: red"> (*)</span></label>
-                                <select  id = "semesterIdEdit" class="form-control" name="semesterIdEdit">
-                                    <option value="">Chọn</option>
-                                    @foreach($semesters as $db)
-                                    <option value="{{$db->id}}">{{$db->name}}</option>
-                                    @endforeach
-                                </select>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input form-md-floating-label {{ $errors->has('course_idEdit') ? 'has-error' : '' }}">
+                                    <label for="course_idEdit">Khóa học<span class="requireds" style="color: red"> (*)</span></label>
+                                    <select  id = "course_idEdit" class="form-control" name="course_idEdit">
+                                        <option value="">Chọn</option>
+                                        {{-- @foreach($semesters as $db)
+                                        <option value="{{$db->id}}">{{$db->name}}</option>
+                                        @endforeach --}}
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-
-                        <div class="col-md-12">
-                            <div class="form-group form-md-line-input form-md-floating-label {{ $errors->has('description') ? 'has-error' : '' }}">
-                                <label for="descriptionEdit">Mô tả</label>
-                                <input type="text" class="form-control" id="descriptionEdit" name="descriptionEdit">
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input form-md-floating-label {{ $errors->has('nameClassEdit') ? 'has-error' : '' }}">
+                                    <label for="nameClassEdit">Tên lớp học<span class="requireds" style="color: red"> (*)</span></label>
+                                    <input type="text" class="form-control" id="nameClassEdit" name="nameClass">
+                                </div>
                             </div>
-                        </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input form-md-floating-label {{ $errors->has('teacher_idEdit') ? 'has-error' : '' }}">
+                                    <label for="teacher_idEdit">Giảng viên<span class="requireds" style="color: red"> (*)</span></label>
+                                    <select  id = "teacher_idEdit" class="form-control" name="teacher_idEdit">
+                                        <option value="">Chọn</option>
+                                        @foreach($users as $db)
+                                        <option value="{{$db->id}}">{{$db->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input form-md-floating-label {{ $errors->has('type_classEdit') ? 'has-error' : '' }}">
+                                    <label for="type_classEdit">Loại lớp học<span class="requireds" style="color: red"> (*)</span></label>
+                                    <select  id = "type_classEdit" class="form-control" name="type_classEdit">
+                                        <option value="">Chọn</option>
+                                        <option value="1">Thực hành</option>
+                                        <option value="2">Lí thuyết</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input form-md-floating-label {{ $errors->has('status_classEdit') ? 'has-error' : '' }}">
+                                    <label for="status_classEdit">Trạng thái lớp học<span class="requireds" style="color: red"> (*)</span></label>
+                                    <select  id = "status_classEdit" class="form-control" name="status_classEdit" disabled>
+                                        <option value="1">Chưa diễn ra</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input form-md-floating-label {{ $errors->has('scheduleEdit') ? 'has-error' : '' }}">
+                                    <label for="scheduleEdit">Lịch học<span class="requireds" style="color: red"> (*)</span></label>
+                                    <input type="text" class="form-control" id="scheduleEdit" name="scheduleEdit">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input form-md-floating-label {{ $errors->has('department_idEdit') ? 'has-error' : '' }}">
+                                    <label for="department_idEdit">Phòng học</label>
+                                    <select  id = "department_idEdit" class="form-control" name="department_idEdit">
+                                        <option value="">Chọn</option>
+                                        @foreach($departments as $db)
+                                        <option value="{{$db->id}}">{{$db->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input form-md-floating-label {{ $errors->has('start_dateEdit') ? 'has-error' : '' }}">
+                                    <label for="start_dateEdit">Thời gian bắt đầu<span class="requireds" style="color: red"> (*)</span></label>
+                                    <input type="text" class="form-control" id="start_dateEdit" name="start_dateEdit">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input form-md-floating-label {{ $errors->has('end_dateEdit') ? 'has-error' : '' }}">
+                                    <label for="end_dateEdit">Thời gian kết thúc<span class="requireds" style="color: red"> (*)</span></label>
+                                    <input type="text" class="form-control" id="end_dateEdit" name="end_dateEdit">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-md-line-input form-md-floating-label {{ $errors->has('total_studentEdit') ? 'has-error' : '' }}">
+                                    <label for="total_studentEdit">Số lượng sinh viên<span class="requireds" style="color: red"> (*)</span></label>
+                                    <input type="text" class="form-control" id="total_studentEdit" name="total_studentEdit">
+                                </div>
+                            </div>
                     </form>
                 </div>
                 <div class="modal-footer" style="justify-content: center;">
                     <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Đóng</button>
                     <button type="submit" class="btn btn-sm btn-warning green" id="btn-update"> Cập nhật</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="detail">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" align="center">
+                    <h4 class="modal-title uppercase" > Chi tiết lớp học </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th style="width: 30%">Học kì</th>
+                                    <td id="semester_idDetail"></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 30%">Tên khóa học</th>
+                                    <td id="course_idDetail"></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 30%">Tên lớp học </th>
+                                    <td id="nameClassDetail"></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 30%">Giảng viên</th>
+                                    <td id="teacher_idDetail"></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 30%">Loại lớp học</th>
+                                    <td id="type_classDetail"></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 30%">Trạng thái lớp học </th>
+                                    <td id="status_classDetail"></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 30%">Thời gian bắt đầu</th>
+                                    <td id="start_dateDetail"></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 30%">Thời gian kết thúc</th>
+                                    <td id="end_dateDetail"></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 30%">Lịch học </th>
+                                    <td id="scheduleDetail"></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 30%">Phòng học</th>
+                                    <td id="department_idDetail"></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 30%">Số lượng sinh viên</th>
+                                    <td id="total_studentDetail"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer" style="justify-content: center;">
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Đóng</button>
                 </div>
             </div>
         </div>
@@ -225,7 +357,21 @@
         zIndexOffset: 10000,
         startDate: '0d'
     });
-    var table = $('#class_list').DataTable({ 
+    $('#frmEditUser #end_dateEdit').datepicker({
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        container: '#frmEditUser',
+        zIndexOffset: 10000,
+        startDate: '0d'
+    });
+    $('#frmEditUser #start_dateEdit').datepicker({
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        container: '#frmEditUser',
+        zIndexOffset: 10000,
+        startDate: '0d'
+    });
+    var table = $('#class_list').DataTable({
         processing: true,
         serverSide: true,
         ordering: false,
@@ -244,7 +390,7 @@
             {data: 'name'},
             {data: 'teacher_id'},
             {data: 'type_class'},
-            {data: 'status_class', className: 'tx-center'},  
+            {data: 'status_class', className: 'tx-center'},
         ]
     });
     $(document).on('click', '.btn-delete', function(){
@@ -258,7 +404,7 @@
           cancelButtonText: "Không",
           confirmButtonText: "Có",
         },
-        function() { 
+        function() {
           $.ajax({
             url: '/class-room/delete',
             type: "POST",
@@ -328,12 +474,20 @@
             },
             success: function (res) {
                 $('#id').val(res.data.id);
-                $('#nameCourseEdit').val(res.data.name);
-                $('#descriptionEdit').val(res.data.description);
-                $('#semesterIdEdit').val(res.data.semester_id);
+                $('#nameClassEdit').val(res.data.name);
+                $('#semester_idEdit').val(res.data.semester_id);
+                $('#course_idEdit').val(res.data.course_id);
+                $('#teacher_idEdit').val(res.data.teacher_id);
+                $('#type_classEdit').val(res.data.type_class);
+                $('#status_classEdit').val(res.data.status_class);
+                $('#scheduleEdit').val(res.data.schedule);
+                $('#department_idEdit').val(res.data.department_id);
+                $('#start_dateEdit').val(res.data.start_date);
+                $('#end_dateEdit').val(res.data.end_date);
+                $('#total_studentEdit').val(res.data.total_student);
 
             },error: function (xhr, ajaxOptions, thrownError) {
-                toastr["error"](thrownError); 
+                toastr["error"](thrownError);
             }
         });
     });
@@ -344,9 +498,17 @@
           type: 'POST',
           data: {
             id: $('#id').val(),
-            name: $('#nameCourseEdit').val(),
-            semester_id: $('#semesterIdEdit').val(),
-            description: $('#descriptionEdit').val(),
+            name: $('#nameClassEdit').val(),
+            semester_id: $('#semester_idEdit').val(),
+            course_id: $('#course_idEdit').val(),
+            teacher_id: $('#teacher_idEdit').val(),
+            type_class: $('#type_classEdit').val(),
+            status_class: $('#status_classEdit').val(),
+            schedule: $('#scheduleEdit').val(),
+            department_id: $('#department_idEdit').val(),
+            start_date: $('#start_dateEdit').val(),
+            end_date: $('#end_dateEdit').val(),
+            total_student: $('#total_studentEdit').val(),
           },
           success: function (res)
           {
@@ -374,7 +536,61 @@
                 });
 
             },error: function (xhr, ajaxOptions, thrownError) {
-                toastr["error"](thrownError); 
+                toastr["error"](thrownError);
+            }
+        });
+    });
+    $( "#semester_idEdit" ).change(function() {
+        var id = $('#semester_idEdit').val();
+        $.ajax({
+            type: 'get',
+            url: '/get-course-by-semester/' + id,
+            data:   {
+                id: id,
+            },
+            success: function (res) {
+                $.each(res.data, function(i, value) {
+                    $('#course_idEdit').append('<option value="'+ value.id+'">'+ value.name +'</option>');
+                });
+
+            },error: function (xhr, ajaxOptions, thrownError) {
+                toastr["error"](thrownError);
+            }
+        });
+    });
+    $(document).on('click', '.btn-detail', function () {
+        alert(123);
+        var id = $(this).attr('data-id');
+        $('#detail').modal('show');
+
+        $.ajax({
+            type: 'get',
+            url: '/class-room/edit/' + id,
+            data:   {
+                id: id,
+            },
+            success: function (res) {
+                $('#id').html(res.data.id);
+                $('#semester_idDetail').html(res.data.semester_id);
+                $('#course_idDetail').html(res.data.course_id);
+                $('#nameClassDetail').html(res.data.userNameTeacher);
+                $('#teacher_idDetail').html(res.data.teacher_id);
+                $('#type_classDetail').html(res.data.type_class);
+                $('#start_dateDetail').html(res.data.start_date);
+                $('#end_dateDetail').html(res.data.end_date);
+                $('#scheduleDetail').html(res.data.schedule);
+                $('#department_idDetail').html(res.data.department_id);
+                $('#total_studentDetail').html(res.data.total_student);
+                if (res.data.status_class == 1) {
+                    $('#status_classDetail').html("Chưa diễn ra");
+                } else if (res.data.status_class == 2) {
+                    $('#status_classDetail').html("Đang diễn ra");
+                } else {
+                    $('#status_classDetail').html("Đã kết thúc");
+                }
+
+            },error: function (xhr, ajaxOptions, thrownError) {
+                toastr["error"](thrownError);
             }
         });
     });

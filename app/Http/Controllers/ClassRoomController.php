@@ -35,14 +35,16 @@ class ClassRoomController extends Controller
         } else {
             $classRooms = ClassRoom::where('teacher_id', $user->id)->orderBy('id', 'desc');
         }
-        
+
         return DataTables::of($classRooms)
             ->addIndexColumn()
             ->addColumn('action', function ($classRooms){
                 $txt = "";
                 $txt .= '<a data-id="' . $classRooms->id . '" class="icon-warning btn btn-xs btn-primary btn-detail" data-tooltip="tooltip" data-placement="top" title="Chi tiết"/><i class="fas fa-eye"></i></a>';
-                if (Auth::user()->position == 1) {
+                if (Auth::user()->position == 1  && $classRooms->status_class != 3) {
                     $txt .= '<a data-id="' . $classRooms->id . '" class="icon-warning btn btn-xs btn-warning btn-edit" data-tooltip="tooltip" data-placement="top" title="Chỉnh sửa"/><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>';
+                }
+                if (Auth::user()->position == 1 && $classRooms->status_class == 1) {
                     $txt .= '<a data-id="' . $classRooms->id . '" class="icon-danger btn btn-xs btn-danger btn-delete" data-tooltip="tooltip" data-placement="top" title="Xóa"/><i class="fas fa-trash-alt" aria-hidden="true"></i></a>';
                 }
 
@@ -85,7 +87,7 @@ class ClassRoomController extends Controller
         try {
 
             $user = ClassRoom::find($request->id)->delete();
-            
+
             DB::commit();
 
             return response()->json([
@@ -118,7 +120,7 @@ class ClassRoomController extends Controller
                 'start_date' => $data['start_date'],
                 'end_date' => $data['end_date'],
                 'total_student' => $data['total_student']
-            ]);        
+            ]);
             DB::commit();
 
             return response()->json([
