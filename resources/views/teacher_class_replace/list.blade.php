@@ -3,8 +3,8 @@
 @endsection
 @section('content')
     <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-10">
+        <div class="col-md-3"></div>
+        <div class="col-md-9 cutomize">
             <div class="portlet light bordered" style="margin-top: 35px;">
                 <div class="portlet-title">
                     <div class="caption font-dark">
