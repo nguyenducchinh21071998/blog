@@ -49,4 +49,16 @@
       display: flex;
       justify-content: center;
     }
+    .cutomize {
+      margin-left: -80px;
+    }
+    .dataTables_filter {
+      margin-right: -65px
+    }
+    .dataTables_paginate {
+      margin-right: -65px
+    }
+    .table-bordered {
+      width: 1086px !important;
+    }
 </style>
