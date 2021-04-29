@@ -8,7 +8,7 @@ use App\User;
 use Illuminate\Support\Facades\DB;
 use Log;
 use \Illuminate\Support\Facades\Hash;
-use Mail;
+use Illuminate\Support\Facades\Mail;
 class UserController extends Controller
 {
     public function index() {
@@ -54,7 +54,7 @@ class UserController extends Controller
         try {
 
             $user = User::find($request->id)->delete();
-            
+
             DB::commit();
 
             return response()->json([
@@ -84,6 +84,7 @@ class UserController extends Controller
                 'position' => $data['position'],
                 'password' => Hash::make('123456789')
             ]);
+            Mail::to($data['email'])->send(new \App\Mail\MyTestMail($data));
             DB::commit();
             return response()->json([
                 'error' => false,

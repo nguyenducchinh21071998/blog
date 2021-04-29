@@ -13,6 +13,7 @@ use Log;
 use \Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\ClassRoom;
+use Illuminate\Support\Facades\Mail;
 
 class TeacherClassReplaceController extends Controller
 {
@@ -143,6 +144,14 @@ class TeacherClassReplaceController extends Controller
                 'replacement_day' => $data['replacement_day'],
                 'reason' => $data['reason']
             ]);
+            $dataCustomize = [];
+            $user = User::find($data['teacher_replace_id']);
+            $dataCustomize['teacher_name'] = User::find(Auth::user()->id)->name;
+            $dataCustomize['teacher_replace_name'] = $user->name;
+            $dataCustomize['class_room_name'] = ClassRoom::find($data['class_room_id'])->name;
+            $dataCustomize['replacement_day'] = $data['replacement_day'];
+            $dataCustomize['reason'] = $data['reason'];
+            Mail::to($user->email)->send(new \App\Mail\SendMailReplace($dataCustomize));
             DB::commit();
             return response()->json([
                 'error' => false,
