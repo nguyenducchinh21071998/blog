@@ -9,6 +9,15 @@
             border-color: #F36E24;
             color: white;
         }
+        .portlet-body {
+            width: 1087px;
+            margin-left: 255px;
+        }
+        .fc .fc-toolbar > * > :first-child {
+            margin-left: 0;
+            text-transform: uppercase;
+            color: #ff0909;
+        }
     </style>
 @endsection
 @section('content')

@@ -9,16 +9,28 @@ use Carbon\Carbon;
 use Entrust;
 use App\User;
 use App\Department;
+use Illuminate\Support\Facades\Auth;
 
 class CalendarController extends Controller
 {
     public function fullCalendar()
     {
-		$units = ClassRoom::join('class_room_units', 'class_room_units.class_room_id', '=', 'class_rooms.id')
-							->select('class_rooms.name as class_name', 'unit', 'class_room_units.name as unit_name',
-                                    'class_room_units.start_date as start_date_unite', 'class_rooms.id as class_room_id', 'class_rooms.teacher_id as teacher_id',
-                                    'class_rooms.department_id')
-							->get();
+        $user = Auth::user();
+        if ($user->position == 1) {
+            $units = ClassRoom::join('class_room_units', 'class_room_units.class_room_id', '=', 'class_rooms.id')
+                                ->select('class_rooms.name as class_name', 'unit', 'class_room_units.name as unit_name',
+                                        'class_room_units.start_date as start_date_unite', 'class_rooms.id as class_room_id', 'class_rooms.teacher_id as teacher_id',
+                                        'class_rooms.department_id')
+                                ->get();
+        } else {
+            $units = ClassRoom::join('class_room_units', 'class_room_units.class_room_id', '=', 'class_rooms.id')
+                                ->where('class_rooms.teacher_id', '=', $user->id)
+                                ->select('class_rooms.name as class_name', 'unit', 'class_room_units.name as unit_name',
+                                        'class_room_units.start_date as start_date_unite', 'class_rooms.id as class_room_id', 'class_rooms.teacher_id as teacher_id',
+                                        'class_rooms.department_id')
+                                ->get();
+        }
+
 		foreach ($units as $unit) {
 
 			$unit->teacher_id = User::where('id', $unit->teacher_id)->first()->name;
@@ -29,12 +41,14 @@ class CalendarController extends Controller
 			$end = Carbon::createFromFormat('Y-m-d H:i:s', $unit->start_date_unite)->addHours(2);
 			$learn_time[] = Calendar::event(
 											// false la dung full chức năng ,$start là thời gian bắt đầu ,$end thơi gian kết thúc
-										    "Lớp $unit->class_name \n Unit $unit->unit - $unit->unit_name",
+										    "$unit->class_name\n$unit->teacher_id\n$unit->department_id\nBuổi $unit->unit",
 										    false,
 										    $start,
                                             $end,
 											$unit->id,
 											[
+                                                'color' => 'red',
+                                                'background-color' => 'red',
 							                    'description' => date('H:i',strtotime($start)) . " - " . date('H:i', strtotime($end)) . "<br>Lớp $unit->class_name / Unit $unit->unit - $unit->unit_name <br> $unit->teacher <br> " . trim($unit->tutor, ", "),
 							                ]
 			);
@@ -55,8 +69,7 @@ class CalendarController extends Controller
 								        });
 							         }',
 							         'eventClick' => 'function(event, element) {
-						             	console.log(event);
-						             	console.log(element);
+						             	console.log(123, event);
 							         }',
 							         "eventDrop" =>" function(event, delta) {
 										console.log(event.end.format());
@@ -70,7 +83,6 @@ class CalendarController extends Controller
 								]);
 
 		}
-// dd($calendar);
 		return view('fullCalendar.index', [
 			"calendar" => $calendar,
 		]);
