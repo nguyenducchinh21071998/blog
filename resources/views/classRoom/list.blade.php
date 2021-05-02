@@ -158,7 +158,7 @@
         </div>
     </div>
     <div class="modal fade" id="edit">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">CHỈNH SỬA lớp học</h4>
@@ -220,8 +220,10 @@
                             <div class="col-md-6">
                                 <div class="form-group form-md-line-input form-md-floating-label {{ $errors->has('status_classEdit') ? 'has-error' : '' }}">
                                     <label for="status_classEdit">Trạng thái lớp học<span class="requireds" style="color: red"> (*)</span></label>
-                                    <select  id = "status_classEdit" class="form-control" name="status_classEdit" disabled>
+                                    <select  id = "status_classEdit" class="form-control" name="status_classEdit">
                                         <option value="1">Chưa diễn ra</option>
+                                        <option value="2">Đang diễn ra</option>
+                                        <option value="3">Đã kết thúc</option>
                                     </select>
                                 </div>
                             </div>
@@ -558,8 +560,11 @@
             }
         });
     });
+    $(document).on('click', '.btn-unit', function () {
+        var id = $(this).attr('data-id');
+        window.location.href = '/' + id;
+    });
     $(document).on('click', '.btn-detail', function () {
-        alert(123);
         var id = $(this).attr('data-id');
         $('#detail').modal('show');
 

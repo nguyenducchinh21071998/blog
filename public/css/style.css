@@ -1,0 +1,9 @@
+.modal-title{
+    color: orange;
+    font-weight: bold !important;
+    text-align: center;
+    text-transform: uppercase;
+}
+.modal-header {
+	border-bottom: 1px solid #ffa331 !important;
+}

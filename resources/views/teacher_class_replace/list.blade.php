@@ -10,7 +10,7 @@
                     <div class="caption font-dark">
                         <i class="icon-settings font-dark"></i>
                         <h2>
-                            <span class="caption-subject bold uppercase"> Danh sách người dùng</span>
+                            <span class="caption-subject bold uppercase"> Danh sách lịch dạy thay</span>
                         </h2>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header" align="center">
-                    <h4 class="modal-title uppercase" > Tạo lịch dạy thay </h4>
+                    <h4 class="modal-title uppercase" >Chi tiết lịch dạy thay</h4>
                 </div>
                 <div class="modal-body">
                     <div class="col-md-12">
@@ -99,7 +99,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Chi tiết lịch dạy thay </h4>
+                    <h4 class="modal-title"> Tạo lịch dạy thay</h4>
                 </div>
                 <div class="modal-body">
                     <form  action="" id="frmCreateUser" name="frmCreateUser" method="POST" enctype="multipart/form-data" autocomplete="off">
@@ -125,7 +125,7 @@
 
                         <div class="col-md-12">
                             <div class="form-group form-md-line-input form-md-floating-label {{ $errors->has('teacher_replace_id') ? 'has-error' : '' }}">
-                                <label for="teacher_replace_id">Số điện thoại<span class="requireds" style="color: red"> (*)</span></label>
+                                <label for="teacher_replace_id">Người dạy thay<span class="requireds" style="color: red"> (*)</span></label>
                                 <select  id = "teacher_replace_id" class="form-control" name="teacher_replace_id">
                                     <option value="">Chọn</option>
                                     @foreach($teachers as $db)
@@ -180,7 +180,7 @@
 
                         <div class="col-md-12">
                             <div class="form-group form-md-line-input form-md-floating-label {{ $errors->has('teacher_replace_idEdit') ? 'has-error' : '' }}">
-                                <label for="teacher_replace_idEdit">Số điện thoại<span class="requireds" style="color: red"> (*)</span></label>
+                                <label for="teacher_replace_idEdit">Người dạy thay<span class="requireds" style="color: red"> (*)</span></label>
                                 <select  id = "teacher_replace_idEdit" class="form-control" name="teacher_replace_idEdit">
                                     <option value="">Chọn</option>
                                     @foreach($teachers as $db)

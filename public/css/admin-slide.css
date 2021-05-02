@@ -1,0 +1,119 @@
+  span{
+    line-height: 2 !important;
+  }
+  img {
+    display: block !important;
+    max-width: 100%;
+  }
+
+  .modal-body .col-sm-12{
+    margin-top: 20px !important;
+    clear: both;
+  }
+
+  .sweet-alert{
+    z-index: 50000;
+  }
+
+  .sweet-overlay{
+    z-index: 49000;
+  }
+  .info_btn{
+    width: 50% !important;
+    float: left;
+  }
+  #createSlide .portlet-body, #editSlide .portlet-body{
+    float: left;
+    width: 48%;
+    padding: 44px 12px 0 20px;
+  }
+  .modal-footer{
+    clear: both;
+  }
+  #showSlide .modal-dialog{
+    background: white;
+  }
+  #showSlide #slide_name{
+    position: absolute;
+    top: 100px;
+    color: white;
+    font-size: 21px;
+    font-weight: bold;
+    width: 94%;
+    text-align: center;
+  }
+  #showSlide #info_content,#showSlide  .btn_demo{
+    position: absolute;
+    color: white;
+    font-size: 12px;
+  }
+  #showSlide #info_content{
+    top: 126px;
+    left: 60px;
+    width: 82%;
+    text-align: center;
+    word-wrap: break-word;
+  }
+  #showSlide .btn_demo{
+    top: 206px;
+    width: 98%;
+  }
+  #showSlide .btn_demo div{
+    padding: 7px;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  #showSlide #btn01{
+    background: orange;
+    border: 1px solid orange;
+    display: inline-block;
+  }
+  #showSlide #btn02{
+    border: 1px solid white;
+    background: rgba(1,1,1,0.1);
+    display: inline-block;
+  }
+  #showSlide #images{
+    width: 100%;
+    height: 302px;
+  }
+  .fileinput-exists{
+    display: none;
+  }
+  .portlet-body img{
+    height: 100%;
+  }
+  @media only screen and (max-width: 900px) and (min-width: 600px){
+    #showSlide .btn_demo {
+      padding: 2px;
+    }
+    #createSlide .modal-dialog, #editSlide .modal-dialog{
+      width: 85% !important;
+    }
+  }
+  @media only screen and (max-width: 1200px) and (min-width: 900px){
+
+  }
+  @media only screen and (max-width: 600px){
+    #showSlide .modal-dialog{
+      width: 96% !important;
+    }
+    #showSlide .btn_demo {
+      top: 196px;
+      padding: 4px;
+      font-size: 9px;
+    }
+    #showSlide #slide_name {
+      font-size: 16px;
+    }
+    #showSlide #info_content {
+      top: 124px;
+      font-size: 9px;
+    }
+    #createSlide .modal-dialog, #editSlide .modal-dialog{
+      width: 95% !important;
+    }
+    .info_btn{
+      width: 100% !important;
+    }
+  }

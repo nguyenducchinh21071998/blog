@@ -47,6 +47,7 @@ class ClassRoomController extends Controller
                 if (Auth::user()->position == 1 && $classRooms->status_class == 1) {
                     $txt .= '<a data-id="' . $classRooms->id . '" class="icon-danger btn btn-xs btn-danger btn-delete" data-tooltip="tooltip" data-placement="top" title="Xóa"/><i class="fas fa-trash-alt" aria-hidden="true"></i></a>';
                 }
+                    $txt .= '<a data-id="' . $classRooms->id . '" class="icon-danger btn btn-xs btn-secondary btn-unit" data-tooltip="tooltip" data-placement="top" title="Quản lý lớp học"/><i class="fas fa-sign-in-alt"></i></a>';
 
                 return $txt;
             })

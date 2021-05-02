@@ -1,0 +1,38 @@
+#live-chat {
+	bottom: 0;
+	font-size: 12px;
+	right: 60px;
+	position: fixed;
+	width: 250px;
+  height: 28px;
+  background-color: whitesmoke;
+  z-index: 9000000;
+}
+
+#live-chat:hover{
+  cursor: pointer;
+  background-color: white;
+}
+
+#live-chat ul {
+  padding: 0;
+  padding-left: 10px;
+}
+#live-chat ul li{
+  display: inline-block;
+  line-height: 28px;
+  padding-right: 5px;
+}
+
+#live-chat ul li span{
+  font-weight: bold;
+  color: black;
+}
+
+#live-chat ul li span i{
+  color: #039d1d;
+}
+
+.active-chat-box{
+  height: 500px !important;
+}
