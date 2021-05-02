@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class MyTestMail extends Mailable
+class SendMailReplace extends Mailable
 {
     use Queueable, SerializesModels;
     public $details;
@@ -28,7 +28,7 @@ class MyTestMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Tạo mới tài khoản gmail')
-                    ->view('sendMailAccount');
+        return $this->subject('Yêu cầu dạy thay')
+                    ->view('sendMailReplace');
     }
 }
