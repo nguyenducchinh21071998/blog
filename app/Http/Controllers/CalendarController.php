@@ -19,37 +19,41 @@ class CalendarController extends Controller
         if ($user->position == 1) {
             $units = ClassRoom::join('class_room_units', 'class_room_units.class_room_id', '=', 'class_rooms.id')
                                 ->select('class_rooms.name as class_name', 'unit', 'class_room_units.name as unit_name',
-                                        'class_room_units.start_date as start_date_unite', 'class_rooms.id as class_room_id', 'class_rooms.teacher_id as teacher_id',
-                                        'class_rooms.department_id')
+                                        'class_room_units.start_date as start_date_unit', 'class_rooms.id as class_room_id', 'class_rooms.teacher_id as teacher_id',
+                                        'class_rooms.department_id', 'class_room_units.status_class_unit')
                                 ->get();
         } else {
             $units = ClassRoom::join('class_room_units', 'class_room_units.class_room_id', '=', 'class_rooms.id')
                                 ->where('class_rooms.teacher_id', '=', $user->id)
                                 ->select('class_rooms.name as class_name', 'unit', 'class_room_units.name as unit_name',
-                                        'class_room_units.start_date as start_date_unite', 'class_rooms.id as class_room_id', 'class_rooms.teacher_id as teacher_id',
-                                        'class_rooms.department_id')
+                                        'class_room_units.start_date as start_date_unit', 'class_rooms.id as class_room_id', 'class_rooms.teacher_id as teacher_id',
+                                        'class_rooms.department_id', 'class_room_units.status_class_unit')
                                 ->get();
         }
-
 		foreach ($units as $unit) {
-
 			$unit->teacher_id = User::where('id', $unit->teacher_id)->first()->name;
 			$unit->department_id = Department::where('id', $unit->department_id)->first()->name;
 			$learn_time = array();
-			$start = Carbon::createFromFormat('Y-m-d H:i:s', $unit->start_date_unite);
+			$start = Carbon::createFromFormat('Y-m-d H:i:s', $unit->start_date_unit);
 			// 2 là 2 giờ
-			$end = Carbon::createFromFormat('Y-m-d H:i:s', $unit->start_date_unite)->addHours(2);
+			$end = Carbon::createFromFormat('Y-m-d H:i:s', $unit->start_date_unit)->addHours(2);
+            if ($unit->status_class_unit == '2') {
+                $color_back = '#69bb63';
+            } else {
+                $color_back = '#3a87ad';
+            }
+
 			$learn_time[] = Calendar::event(
 											// false la dung full chức năng ,$start là thời gian bắt đầu ,$end thơi gian kết thúc
 										    "$unit->class_name\n$unit->teacher_id\n$unit->department_id\nBuổi $unit->unit",
-										    false,
+										    true,
 										    $start,
                                             $end,
 											$unit->id,
 											[
-                                                'color' => 'red',
+                                                'color' => $color_back,
                                                 'background-color' => 'red',
-							                    'description' => date('H:i',strtotime($start)) . " - " . date('H:i', strtotime($end)) . "<br>Lớp $unit->class_name / Unit $unit->unit - $unit->unit_name <br> $unit->teacher <br> " . trim($unit->tutor, ", "),
+							                    'description' => date('H:i',strtotime($start)) . " - " . date('H:i', strtotime($end)) . "<br>Lớp $unit->class_name / Unit $unit->unit - $unit->unit_name <br> $unit->teacher_id <br> ",
 							                ]
 			);
 
@@ -83,6 +87,7 @@ class CalendarController extends Controller
 								]);
 
 		}
+        // dd($calendar);
 		return view('fullCalendar.index', [
 			"calendar" => $calendar,
 		]);

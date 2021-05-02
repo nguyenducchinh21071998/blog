@@ -25,7 +25,6 @@
     <div class="portlet-body">
     	<div id='calendar'></div>
     	<br>
-        {{-- {{dd($calendar)}} --}}
         {!! $calendar->calendar() !!}
     </div>
 </div>
@@ -34,6 +33,9 @@
 @section('footer')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+<script src="{{ asset('js/locale-all.js') }}"></script>
+<script src="{{ asset('js/jquery.qtip.min.js') }}"></script>
 	{!! $calendar->script() !!}
 
 	<script type="text/javascript">
