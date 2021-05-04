@@ -57,7 +57,7 @@ class CalendarController extends Controller
 							                ]
 			);
 
-			$calendar = Calendar::setId('zent')
+			$calendar = Calendar::setId('kma')
 								->addEvents($learn_time)
 								->setCallbacks([ //set fullcalendar callback options (will not be JSON encoded)
 							        'eventRender' => 'function(event, element) {

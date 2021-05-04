@@ -24,6 +24,7 @@
 <div class="portlet light bordered">
     <div class="portlet-body">
     	<div id='calendar'></div>
+        <a class="btn btn-warning" style="margin-top: 20px; margin-left: 962px;" href="{{ route('export') }}">Export Excel</a>
     	<br>
         {!! $calendar->calendar() !!}
     </div>

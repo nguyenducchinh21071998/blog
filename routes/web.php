@@ -61,3 +61,6 @@ Route::post('/class-room-unit/store', 'ClassRoomUnitController@store');
 Route::get('/class-room-unit/edit/{id}', 'ClassRoomUnitController@edit');
 Route::post('/class-room-unit/update', 'ClassRoomUnitController@update');
 Route::post('/class-room-unit/update-status', 'ClassRoomUnitController@updateStatus');
+
+// hienj taij chua export dc do dang trung router voi list unit thay router 1 trong 2 laf ok
+Route::get('export', 'ExportController@export')->name('export');
