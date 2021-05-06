@@ -54,7 +54,7 @@ Route::post('/teach-class-replace/update', 'TeacherClassReplaceController@update
 Route::post('/teach-class-replace/update-replace', 'TeacherClassReplaceController@updateReplace');
 Route::get('/calendar', 'CalendarController@fullCalendar');
 
-Route::get('/{id}', 'ClassRoomUnitController@index');
+Route::get('/detail/unit/{id}', 'ClassRoomUnitController@index');
 Route::get('/class-room-unit/list/{id}', 'ClassRoomUnitController@getListClass');
 Route::post('/class-room-unit/delete', 'ClassRoomUnitController@delete');
 Route::post('/class-room-unit/store', 'ClassRoomUnitController@store');

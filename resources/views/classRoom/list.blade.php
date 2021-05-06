@@ -562,7 +562,7 @@
     });
     $(document).on('click', '.btn-unit', function () {
         var id = $(this).attr('data-id');
-        window.location.href = '/' + id;
+        window.location.href = '/detail/unit/' + id;
     });
     $(document).on('click', '.btn-detail', function () {
         var id = $(this).attr('data-id');
