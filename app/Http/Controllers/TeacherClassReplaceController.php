@@ -13,6 +13,7 @@ use Log;
 use \Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\ClassRoom;
+use App\ClassRoomUnit;
 use Illuminate\Support\Facades\Mail;
 
 class TeacherClassReplaceController extends Controller
@@ -141,15 +142,19 @@ class TeacherClassReplaceController extends Controller
                 'class_room_id' => $data['class_room_id'],
                 'teacher_id' => Auth::user()->id,
                 'teacher_replace_id' => $data['teacher_replace_id'],
-                'replacement_day' => $data['replacement_day'],
+                'unit_id' => $data['unit_id'],
                 'reason' => $data['reason']
+            ]);
+            $classRoomUnit = ClassRoomUnit::where('id', $data['unit_id'])->first();
+            $classRoomUnit->update([
+                'status_class_unit' => 3
             ]);
             $dataCustomize = [];
             $user = User::find($data['teacher_replace_id']);
             $dataCustomize['teacher_name'] = User::find(Auth::user()->id)->name;
             $dataCustomize['teacher_replace_name'] = $user->name;
             $dataCustomize['class_room_name'] = ClassRoom::find($data['class_room_id'])->name;
-            $dataCustomize['replacement_day'] = $data['replacement_day'];
+            $dataCustomize['replacement_day'] = $classRoomUnit->start_date;
             $dataCustomize['reason'] = $data['reason'];
             Mail::to($user->email)->send(new \App\Mail\SendMailReplace($dataCustomize));
             DB::commit();
@@ -171,6 +176,9 @@ class TeacherClassReplaceController extends Controller
 
         try {
             $data = TeacherClassReplace::find($id);
+            $classRoomUnit = ClassRoomUnit::where('id', $data['unit_id'])->first();
+            $data['replacement_day'] = $classRoomUnit->start_date;
+            $data['name_class'] = $classRoomUnit->name;
             $data['userNameTeacher'] = User::find($data->teacher_id)->name;
             $data['userNameTeacherRepace'] = User::find($data->teacher_replace_id)->name;
             $data['className'] = ClassRoom::find($data->class_room_id)->name;

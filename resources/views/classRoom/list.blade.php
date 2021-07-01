@@ -45,6 +45,70 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="editDetail">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Chi tiết lớp học</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th style="width: 30%">Học kì</th>
+                                    <td id="semester_idDetail"></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 30%">Tên khóa học</th>
+                                    <td id="course_idDetail"></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 30%">Tên lớp học </th>
+                                    <td id="nameClassDetail"></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 30%">Giảng viên</th>
+                                    <td id="teacher_idDetail"></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 30%">Loại lớp học</th>
+                                    <td id="type_classDetail"></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 30%">Trạng thái lớp học </th>
+                                    <td id="status_classDetail"></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 30%">Thời gian bắt đầu</th>
+                                    <td id="start_dateDetail"></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 30%">Thời gian kết thúc</th>
+                                    <td id="end_dateDetail"></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 30%">Lịch học </th>
+                                    <td id="scheduleDetail"></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 30%">Phòng học</th>
+                                    <td id="department_idDetail"></td>
+                                </tr>
+                                <tr>
+                                    <th style="width: 30%">Số lượng sinh viên</th>
+                                    <td id="total_studentDetail"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer" style="justify-content: center;">
+                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="create">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
@@ -267,70 +331,6 @@
                 <div class="modal-footer" style="justify-content: center;">
                     <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Đóng</button>
                     <button type="submit" class="btn btn-sm btn-warning green" id="btn-update"> Cập nhật</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="detail">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header" align="center">
-                    <h4 class="modal-title uppercase" > Chi tiết lớp học </h4>
-                </div>
-                <div class="modal-body">
-                    <div class="col-md-12">
-                        <table class="table table-bordered">
-                            <tbody>
-                                <tr>
-                                    <th style="width: 30%">Học kì</th>
-                                    <td id="semester_idDetail"></td>
-                                </tr>
-                                <tr>
-                                    <th style="width: 30%">Tên khóa học</th>
-                                    <td id="course_idDetail"></td>
-                                </tr>
-                                <tr>
-                                    <th style="width: 30%">Tên lớp học </th>
-                                    <td id="nameClassDetail"></td>
-                                </tr>
-                                <tr>
-                                    <th style="width: 30%">Giảng viên</th>
-                                    <td id="teacher_idDetail"></td>
-                                </tr>
-                                <tr>
-                                    <th style="width: 30%">Loại lớp học</th>
-                                    <td id="type_classDetail"></td>
-                                </tr>
-                                <tr>
-                                    <th style="width: 30%">Trạng thái lớp học </th>
-                                    <td id="status_classDetail"></td>
-                                </tr>
-                                <tr>
-                                    <th style="width: 30%">Thời gian bắt đầu</th>
-                                    <td id="start_dateDetail"></td>
-                                </tr>
-                                <tr>
-                                    <th style="width: 30%">Thời gian kết thúc</th>
-                                    <td id="end_dateDetail"></td>
-                                </tr>
-                                <tr>
-                                    <th style="width: 30%">Lịch học </th>
-                                    <td id="scheduleDetail"></td>
-                                </tr>
-                                <tr>
-                                    <th style="width: 30%">Phòng học</th>
-                                    <td id="department_idDetail"></td>
-                                </tr>
-                                <tr>
-                                    <th style="width: 30%">Số lượng sinh viên</th>
-                                    <td id="total_studentDetail"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="modal-footer" style="justify-content: center;">
-                    <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Đóng</button>
                 </div>
             </div>
         </div>
@@ -566,11 +566,11 @@
     });
     $(document).on('click', '.btn-detail', function () {
         var id = $(this).attr('data-id');
-        $('#detail').modal('show');
+        $('#editDetail').modal('show');
 
         $.ajax({
             type: 'get',
-            url: '/class-room/edit/' + id,
+            url: '/class-room/detail/' + id,
             data:   {
                 id: id,
             },
@@ -578,9 +578,13 @@
                 $('#id').html(res.data.id);
                 $('#semester_idDetail').html(res.data.semester_id);
                 $('#course_idDetail').html(res.data.course_id);
-                $('#nameClassDetail').html(res.data.userNameTeacher);
+                $('#nameClassDetail').html(res.data.name);
                 $('#teacher_idDetail').html(res.data.teacher_id);
-                $('#type_classDetail').html(res.data.type_class);
+                if (res.data.type_class == 1) {
+                    $('#type_classDetail').html("Thực hành");
+                } else {
+                    $('#type_classDetail').html("Lí thuyết");
+                }
                 $('#start_dateDetail').html(res.data.start_date);
                 $('#end_dateDetail').html(res.data.end_date);
                 $('#scheduleDetail').html(res.data.schedule);

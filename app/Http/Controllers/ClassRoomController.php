@@ -157,6 +157,31 @@ class ClassRoomController extends Controller
             ], 500);
         }
     }
+    public function detail($id) {
+        DB::beginTransaction();
+
+        try {
+            $data = ClassRoom::find($id);
+            $data['teacher_id'] = User::find($id)->name;
+            $data['department_id'] = Department::find($id)->name;
+            $data['course_id'] = Course::find($id)->name;
+            $data['semester_id'] = Semester::find($id)->name;
+            // dd($data);
+            DB::commit();
+
+            return response()->json([
+                'error' => false,
+                'data' => $data
+            ], 200);
+
+        } catch(Exception $e) {
+
+            response()->json([
+                'error' => true,
+                'message' => 'Internal Server Error'
+            ], 500);
+        }
+    }
     public function update(Request $request) {
 
         DB::beginTransaction();

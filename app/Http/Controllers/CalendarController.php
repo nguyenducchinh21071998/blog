@@ -39,6 +39,8 @@ class CalendarController extends Controller
 			$end = Carbon::createFromFormat('Y-m-d H:i:s', $unit->start_date_unit)->addHours(2);
             if ($unit->status_class_unit == '2') {
                 $color_back = '#69bb63';
+            } else if ($unit->status_class_unit == '3') {
+                $color_back = '#ff0000';
             } else {
                 $color_back = '#3a87ad';
             }
@@ -73,6 +75,7 @@ class CalendarController extends Controller
 								        });
 							         }',
 							         'eventClick' => 'function(event, element) {
+                                         alert(event._def, event)
 						             	console.log(123, event);
 							         }',
 							         "eventDrop" =>" function(event, delta) {

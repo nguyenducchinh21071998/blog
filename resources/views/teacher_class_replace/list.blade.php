@@ -78,6 +78,10 @@
                                     <td id="userIdDetail"></td>
                                 </tr>
                                 <tr>
+                                    <th style="width: 30%">Buổi</th>
+                                    <td id="unite_detail"></td>
+                                </tr>
+                                <tr>
                                     <th style="width: 30%">Ngày dạy thay </th>
                                     <td id="replacement_dayDetail"></td>
                                 </tr>
@@ -122,6 +126,14 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-md-12">
+                            <div class="form-group form-md-line-input form-md-floating-label {{ $errors->has('unit_id') ? 'has-error' : '' }}">
+                                <label for="unit_id">Buổi<span class="requireds" style="color: red"> (*)</span></label>
+                                <select  id = "unit_id" class="form-control" name="unit_id">
+                                    <option value="">Chọn</option>
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="col-md-12">
                             <div class="form-group form-md-line-input form-md-floating-label {{ $errors->has('teacher_replace_id') ? 'has-error' : '' }}">
@@ -132,12 +144,6 @@
                                     <option value="{{$db->id}}">{{$db->name}}</option>
                                     @endforeach
                                 </select>
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group form-md-line-input form-md-floating-label {{ $errors->has('replacement_day') ? 'has-error' : '' }}">
-                                <label for="replacement_day">Thời gian<span class="requireds" style="color: red"> (*)</span></label>
-                                <input type="text" class="form-control" id="replacement_day" name="replacement_day">
                             </div>
                         </div>
                     </form>
@@ -332,7 +338,7 @@
           data: {
             class_room_id: $('#class_room_id').val(),
             teacher_replace_id: $('#teacher_replace_id').val(),
-            replacement_day: $('#replacement_day').val(),
+            unit_id: $('#unit_id').val(),
             reason: $('#reason').val(),
           },
           success: function (res)
@@ -417,6 +423,25 @@
                 } else {
                     $('#statusDetail').html("Đã duyệt");
                 }
+                $('#unite_detail').html(res.data.name_class);
+
+            },error: function (xhr, ajaxOptions, thrownError) {
+                toastr["error"](thrownError);
+            }
+        });
+    });
+    $( "#class_room_id" ).change(function() {
+        var id = $('#class_room_id').val();
+        $.ajax({
+            type: 'get',
+            url: '/get-unit-by-class-room/' + id,
+            data:   {
+                id: id,
+            },
+            success: function (res) {
+                $.each(res.data, function(i, value) {
+                    $('#unit_id').append('<option value="'+ value.id+'">'+ value.name +'</option>');
+                });
 
             },error: function (xhr, ajaxOptions, thrownError) {
                 toastr["error"](thrownError);

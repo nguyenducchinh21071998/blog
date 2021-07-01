@@ -41,9 +41,11 @@ Route::get('/class-room/list', 'ClassRoomController@getListClass');
 Route::post('/class-room/delete', 'ClassRoomController@delete');
 Route::post('/class-room/store', 'ClassRoomController@store');
 Route::get('/class-room/edit/{id}', 'ClassRoomController@edit');
+Route::get('/class-room/detail/{id}', 'ClassRoomController@detail');
 Route::post('/class-room/update', 'ClassRoomController@update');
 
 Route::get('/get-course-by-semester/{id}', 'ClassRoomController@getCourseBy');
+Route::get('/get-unit-by-class-room/{id}', 'ClassRoomUnitController@getUnitBy');
 
 Route::get('/teach-class-replace', 'TeacherClassReplaceController@index');
 Route::get('/teach-class-replace/list', 'TeacherClassReplaceController@getListTeacherClass');

@@ -367,6 +367,8 @@
                 $('#startDateDetail').html(res.data.start_date);
                 if (res.data.status_class_unit == 1) {
                     $('#statusDetail').html("Chưa diễn ra");
+                } else if (res.data.status_class_unit == 3) {
+                    $('#statusDetail').html("Yêu cầu dạy thay");
                 } else {
                     $('#statusDetail').html("Đã hoàn thành");
                 }

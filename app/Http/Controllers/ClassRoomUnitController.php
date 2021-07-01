@@ -32,13 +32,11 @@ class ClassRoomUnitController extends Controller
             ->addIndexColumn()
             ->addColumn('action', function ($classRooms){
                 $txt = "";
-                $txt .= '<a data-id="' . $classRooms->id . '" class="icon-warning btn btn-xs btn-success btn-update-class" data-tooltip="tooltip" data-placement="top" title="Điểm danh lớp học"/><i class="fas fa-check-circle" aria-hidden="true"></i></a>';
                 $txt .= '<a data-id="' . $classRooms->id . '" class="icon-warning btn btn-xs btn-primary btn-detail" data-tooltip="tooltip" data-placement="top" title="Chi tiết"/><i class="fas fa-eye"></i></a>';
                 if ($classRooms->status_class_unit == 1) {
                     $txt .= '<a data-id="' . $classRooms->id . '" class="icon-warning btn btn-xs btn-warning btn-edit" data-tooltip="tooltip" data-placement="top" title="Chỉnh sửa"/><i class="fas fa-pencil-alt" aria-hidden="true"></i></a>';
-                }
-                if ($classRooms->status_class_unit == 1) {
                     $txt .= '<a data-id="' . $classRooms->id . '" class="icon-danger btn btn-xs btn-danger btn-delete" data-tooltip="tooltip" data-placement="top" title="Xóa"/><i class="fas fa-trash-alt" aria-hidden="true"></i></a>';
+                    $txt .= '<a data-id="' . $classRooms->id . '" class="icon-warning btn btn-xs btn-success btn-update-class" data-tooltip="tooltip" data-placement="top" title="Điểm danh lớp học"/><i class="fas fa-check-circle" aria-hidden="true"></i></a>';
                 }
 
                 return $txt;
@@ -53,6 +51,8 @@ class ClassRoomUnitController extends Controller
                 $txt = '';
                 if ($classRooms->status_class_unit == 1) {
                     $txt = 'Chưa diễn ra';
+                } else if ($classRooms->status_class_unit == 3) {
+                    $txt = 'Yêu cầu dạy thay';
                 } else {
                     $txt = 'Đã hoàn thành';
                 }
@@ -174,6 +174,26 @@ class ClassRoomUnitController extends Controller
             return response()->json([
                 'error' => false,
                 'message' => 'Cập nhật thành công !'
+            ], 200);
+
+        } catch(Exception $e) {
+
+            response()->json([
+                'error' => true,
+                'message' => 'Internal Server Error'
+            ], 500);
+        }
+    }
+    public function getUnitBy($id) {
+        DB::beginTransaction();
+
+        try {
+            $data = ClassRoomUnit::where('class_room_id', $id)->where('status_class_unit', 1)->get();
+            DB::commit();
+
+            return response()->json([
+                'error' => false,
+                'data' => $data
             ], 200);
 
         } catch(Exception $e) {
