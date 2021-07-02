@@ -51,7 +51,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header" align="center">
-                    <h4 class="modal-title uppercase" >Chi tiết lịch dạy thay</h4>
+                    <h4 class="modal-title uppercase" >Chi tiết lịch dạy thay xx</h4>
                 </div>
                 <div class="modal-body">
                     <div class="col-md-12">
